@@ -26,7 +26,7 @@ async function start() {
   // example async await function to ask for highest number
   async function pickHighNum() {
     // Set lowest num
-    let minNum = 1;
+    const minNum = 1;
 
     let pickMaxNum = await ask(
       `\nPlease choose a number greater than ${minNum}: `
@@ -47,6 +47,7 @@ async function start() {
     }
 
     async function numGuess() {
+      while (numGen !== numGuess){
       let result = numGen();
       let guessedNum = await ask(
         `Now, allow me to guess a number between ${minNum}, and ${highNum}...Is your number ${result}?`
@@ -54,19 +55,22 @@ async function start() {
       // call y or n function, if no, run h or lower
 
       // we need a yes or no answer from user if result is their number, create await async to ask y or n
-      let highLow = ""   
+      let highLow = "Did I get it?"   
       let answer = await ask(highLow)
          if (answer === "y" || answer === "Y") {
           console.log("I did it!")
-         } else if (answer === "n" || answer === "N") {
+          process.exit();
+         } else {
           console.log("Is your number higher, or lower?")
          }
          
       // if no, we need to use higher or lower condtional (we can reassign highest/lowest value in conditionl) create await async
     }
-    secretInput();
   }
-  pickHighNum();
-
-  // process.exit();
-}
+  
+  secretInput();
+  
+  
+} // While loop
+pickHighNum();
+} // Async function
