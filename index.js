@@ -20,7 +20,6 @@ async function start() {
   );
 }
 // ? Functionality for computer guessing
-//
 async function compGuess() {
   // ? Define the variables
   let minNum = 1;
@@ -46,47 +45,55 @@ async function compGuess() {
   // ? Logic for computer wrong answer/modify range
   while (numGuess !== secretNum) {
     let answer = await ask("Is your number higher(h) or lower(l)? _>");
-    console.log(`numGuess: ${numGuess}`)
+    console.log(`numGuess: ${numGuess}`);
     if (answer === "h" && secretNum > numGuess) {
       minNum = numGuess + 1;
       numGuess = Math.round((minNum + maxNum) / 2);
       let input = await ask(
         `Alright. Is your number ${numGuess}? "y", or "n" _>`
       );
-      if (input == "n" && numGuess == secretNum){
-        console.log(`I smell smoke. Are your pants on fire? ... LIAR, your number IS ${numGuess}, I WIN`)
-        process.exit()
+      if (input == "n" && numGuess == secretNum) {
+        console.log(
+          `I smell smoke. Are your pants on fire? ... LIAR, your number IS ${numGuess}, I WIN`
+        );
+        process.exit();
       }
-      // console.log(`Reminder, your number is ${secretNum}`)
+
       // ? Logic for computer win
       else if (input == "y" && numGuess == secretNum) {
         console.log("I did it!");
         process.exit();
+      } else {
+        console.log(
+          `My computer brain tells me that ${numGuess} is not your number. _>`
+        );
       }
     } else if (answer === "l" && secretNum < numGuess) {
       maxNum = numGuess - 1;
       numGuess = Math.round((minNum + maxNum) / 2);
       let input = await ask(
         `Alright. Is your number ${numGuess}? "y", or "n" _>`
-        );
-        // console.log(`Reminder, your number is ${secretNum}`)
+      );
+
       // ? Logic for computer win
-      if (input == "n" && numGuess == secretNum){
-        console.log(`I smell smoke. Are your pants on fire? ... LIAR, your number IS ${numGuess}, I WIN`)
-        process.exit()
-      }
-      else if (input == "y" && numGuess == secretNum) {
+      if (input == "n" && numGuess == secretNum) {
+        console.log(
+          `I smell smoke. Are your pants on fire? ... LIAR, your number IS ${numGuess}, I WIN`
+        );
+        process.exit();
+      } else if (input == "y" && numGuess == secretNum) {
         console.log("I did it!");
         process.exit();
+      } else {
+        console.log(
+          `My computer brain tells me that ${numGuess} is not your number. _>`
+        );
       }
     } else {
       console.log(
         "You had two options, and you just had to be a rebel. 'h', or 'l'. _>"
       );
-      // console.log(`Your number is ${secretNum}`)
     }
-    // console.log(minNum);
   }
-
-  
 } // ! compGuess end
+
